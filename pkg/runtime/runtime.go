@@ -134,7 +134,7 @@ type PatchFile struct {
 	Base  *sunmao.Application     `json:"base"`
 }
 
-func (r *Runtime) Run() {
+func (r *Runtime) Run(port ...int) {
 	if r.appBuilder == nil {
 		log.Fatalln("please load app before run")
 	}
@@ -332,7 +332,11 @@ func (r *Runtime) Run() {
 		return nil
 	})
 
-	r.e.Logger.Fatal(r.e.Start(":8999"))
+	if len(port) > 0 {
+		r.e.Logger.Fatal(r.e.Start(fmt.Sprintf(":%d", port[0])))
+	} else {
+		r.e.Logger.Fatal(r.e.Start(":8999"))
+	}
 }
 
 func (r *Runtime) LoadApp(builder *sunmao.AppBuilder) error {
@@ -351,6 +355,10 @@ func (r *Runtime) Handle(handler string, fn func(m *Message, connId int) error) 
 
 func (r *Runtime) On(hook string, fn func(connId int) error) {
 	r.hooks[hook] = fn
+}
+
+func (r *Runtime) Echo() *echo.Echo {
+	return r.e
 }
 
 type ExecuteTarget struct {
