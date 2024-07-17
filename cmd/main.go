@@ -56,7 +56,9 @@ func main() {
 		})
 	}
 
-	app.Component(arcoB.NewTable().Data(data).Column(&arco.ArcoTableColumn{
+	app.Component(arcoB.NewTable().Properties(map[string]interface{}{
+		"tableLayoutFixed": false,
+	}).Data(data).Column(&arco.ArcoTableColumn{
 		DataIndex:    "name",
 		Title:        "Name",
 		Type:         "link",
@@ -77,7 +79,7 @@ func main() {
 				"is_dir": "{{ $listItem.is_dir }}",
 			},
 		},
-	}).Hidden("{{ tabs.activeTab != 0 }}"))
+	}))
 
 	fileTypeModule := sunmao.NewModule().
 		Version("custom/v1").

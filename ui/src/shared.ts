@@ -62,6 +62,8 @@ export type ServerMessage = {
   componentId: string;
   name: string;
   parameters?: any;
+  eventType: string;
+  triggerId: string;
 };
 
 export function useApiService({
@@ -82,6 +84,8 @@ export function useApiService({
           componentId: message.componentId,
           name: message.name,
           parameters: message.parameters,
+          eventType: message.eventType,
+          triggerId: message.triggerId
         });
       } catch (error) {
         console.log("message handler", error);

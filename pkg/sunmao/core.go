@@ -48,6 +48,7 @@ type TraitSchema struct {
 type ModuleSpec struct {
 	StateMap   map[string]interface{} `json:"stateMap"`
 	Properties map[string]interface{} `json:"properties"`
+	Methods    []any                  `json:"methods"`
 }
 
 type Module struct {

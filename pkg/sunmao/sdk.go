@@ -136,6 +136,7 @@ func NewModule() *ModuleBuilder {
 			Spec: ModuleSpec{
 				StateMap:   map[string]interface{}{},
 				Properties: map[string]interface{}{},
+				Methods:    []any{},
 			},
 		},
 	}
